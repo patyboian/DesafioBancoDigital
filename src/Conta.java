@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Conta implements IConta {
 
     private static final int AGENCIA_PADRAO = 0001;
@@ -8,10 +11,12 @@ public abstract class Conta implements IConta {
     protected double saldo;
     protected Cliente cliente;
 
+
     public Conta(Cliente cliente){
         this.agencia = AGENCIA_PADRAO;
         this.numero = SEQUENCIAL ++;
         this.cliente = cliente;
+        
     } 
 
     @Override
@@ -28,6 +33,12 @@ public abstract class Conta implements IConta {
     public void transferir(double valor, Conta contaDestino) {
         this.sacar(valor);
         contaDestino.depositar(valor);
+    }
+    
+    public void simularRendimento() {
+    	double valorTotalRendimento;
+    	valorTotalRendimento = saldo * 1.10;
+    	System.out.println((String.format("Seu saldo com rendimento será de: %.2f", valorTotalRendimento)));
     }
 
     public void sacar(){
@@ -59,8 +70,7 @@ public abstract class Conta implements IConta {
     	System.out.println(String.format("Agência: %d",  this.agencia));
         System.out.println(String.format("Número: %d",  this.numero));
         System.out.println(String.format("Saldo: %.2f",  this.saldo));
-        
-    
+          
     }    
     
 }
